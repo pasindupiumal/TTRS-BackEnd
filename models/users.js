@@ -28,6 +28,11 @@ const UserSchema = new Schema({
         required: true,
         minLength: 5,
         maxLength: 255,
+    },
+    nic:{
+        type:String,
+        minLength: 10,
+        maxLength: 15,
     }
 });
 
@@ -39,7 +44,8 @@ function validateUser(user){
         firstName: Joi.string().min(2).max(100).required(),
         lastName: Joi.string().min(2).max(100).required(),
         email: Joi.string().min(5).max(255).required().email(),
-        password: Joi.string().min(5).max(255).required()
+        password: Joi.string().min(5).max(255).required(),
+        nic: Joi.string().min(10).max(15)
     };
 
     return Joi.validate(user, userValidateSchema);
