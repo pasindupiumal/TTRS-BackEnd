@@ -21,7 +21,7 @@ mongoose.connect('mongodb://localhost/TTRS', {useNewUrlParser:true}).then(() => 
     console.log(err);
 })
 
-//User the middleware
+//User the middleware 
 app.use(bodyParser.json());
 
 app.use('/api/trains', trains);

@@ -35,7 +35,7 @@ router.get('/:id', [authMiddleware, admin], async (req, res) => {
     
 });
 
-router.post('/', (req, res) => {
+router.post('/', [authMiddleware, admin], (req, res) => {
 
     const {error} = validateTrain(req.body);
 
@@ -46,7 +46,7 @@ router.post('/', (req, res) => {
     
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', [authMiddleware, admin], (req, res) => {
     
     const {error} = validateTrain(req.body);
 
@@ -58,7 +58,7 @@ router.put('/:id', (req, res) => {
 
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', [authMiddleware, admin], async (req, res) => {
 
     const train = await Train.findByIdAndDelete(req.params.id);
 

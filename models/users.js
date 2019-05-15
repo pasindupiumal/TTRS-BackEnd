@@ -39,6 +39,12 @@ const UserSchema = new Schema({
     isAdmin:{
         type:Boolean,
         default: false
+    },
+    mobileNumber:{
+        type:String,
+        minLength: 10,
+        maxLength: 10,
+        required:true
     }
 });
 
@@ -57,7 +63,8 @@ function validateUser(user){
         email: Joi.string().min(5).max(255).required().email(),
         password: Joi.string().min(5).max(255).required(),
         nic: Joi.string().min(10).max(15),
-        isAdmin:Joi.boolean()
+        isAdmin:Joi.boolean(),
+        mobileNumber: Joi.string().min(10).max(10).required()
     };
 
     return Joi.validate(user, userValidateSchema);
