@@ -1,8 +1,10 @@
 const express = require('express');
+const admin = require('../middleware/admin');
+const authMiddleware = require('../middleware/auth');
 const {Train, validateTrain} = require('../models/trains');
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', authMiddleware, async (req, res) => {
 
     if(Object.keys(req.query).length === 0){
         console.log('No query parameters set. Returning all train shedules');
@@ -20,7 +22,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', [authMiddleware, admin], async (req, res) => {
 
     const train = await Train.findById(req.params.id);
 

@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
     if(user) return res.status(400).send('User already registered');
 
     //If the user is unregistered save the user
-    user = new User(_.pick(req.body, ['firstName', 'lastName', 'email', 'password', 'nic']));
+    user = new User(_.pick(req.body, ['firstName', 'lastName', 'email', 'password', 'nic', 'isAdmin']));
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password, salt);
 
