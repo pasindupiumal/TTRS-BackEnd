@@ -5,6 +5,7 @@ const users = require('./routes/users');
 const auth = require('./routes/auth');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const app = express();
 const port = process.env.PORT  || 3000;
 
@@ -23,6 +24,11 @@ mongoose.connect('mongodb://localhost/TTRS', {useNewUrlParser:true}).then(() => 
 
 //User the middleware 
 app.use(bodyParser.json());
+
+app.use(cors({
+    origin: 'http://localhost:3001',
+    credentials: true
+  }));
 
 app.use('/api/trains', trains);
 app.use('/api/users/', users);

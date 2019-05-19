@@ -61,7 +61,7 @@ function validateUser(user){
         firstName: Joi.string().min(2).max(100).required(),
         lastName: Joi.string().min(2).max(100).required(),
         email: Joi.string().min(5).max(255).required().email(),
-        password: Joi.string().min(5).max(255).required(),
+        password: Joi.string().min(2).max(255).required(),
         nic: Joi.string().min(10).max(15),
         isAdmin:Joi.boolean(),
         mobileNumber: Joi.string().min(10).max(10).required()
