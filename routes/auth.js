@@ -4,6 +4,7 @@ const express = require('express');
 const {User, validateUserForLogin} = require('../models/users');
 const router = express.Router();
 
+//Check whether a given user is registered
 router.post('/', async (req, res) => {
     
     const {error} = validateUserForLogin(req.body);
@@ -23,6 +24,18 @@ router.post('/', async (req, res) => {
 
     res.send(token);
 
+});
+
+//Check whether a given NIC number belongs to a government worker
+router.post('/nic', async (req, res) => {
+    
+    if(req.body.nic.length === 10)
+    {
+        res.send('Government Employee');
+    }
+    else{
+        res.send('Not a Government Employee');
+    }
 });
 
 module.exports = router;
