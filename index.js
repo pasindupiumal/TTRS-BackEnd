@@ -3,6 +3,7 @@ const config = require('config');
 const trains = require('./routes/trains');
 const users = require('./routes/users');
 const auth = require('./routes/auth');
+const payment = require('./routes/payment');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -34,6 +35,7 @@ app.use(bodyParser.json());
 app.use('/api/trains', trains);
 app.use('/api/users/', users);
 app.use('/api/auth', auth);
+app.use('/api/payment', payment);
 
 
 
