@@ -11,6 +11,11 @@ router.get('/', authMiddleware, async (req, res) => {
         const trains = await Train.find().sort('origin');
         res.send(trains);
     }
+    else if(Object.keys(req.query).length === 2 && Object.keys(req.query)[0] === 'origin' && Object.keys(req.query)[1] === 'destination' && (req.query.origin==='' || req.query.destination==='')){
+        console.log('Query parameters set but empty:{origin , destination}');
+        const trains = await Train.find().sort('origin');
+        res.send(trains);
+    }
     else if(Object.keys(req.query).length === 2 && Object.keys(req.query)[0] === 'origin' && Object.keys(req.query)[1] === 'destination'){
         console.log('Query parameters set:{origin , destination}');
         const trains = await Train.find({origin: req.query.origin, destination: req.query.destination});

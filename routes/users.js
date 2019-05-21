@@ -6,7 +6,7 @@ const express = require('express');
 const {User, validateUser} = require('../models/users');
 const router = express.Router();
 
-router.get('/', authMiddleware, async (req, res) => {
+router.get('/', [authMiddleware, admin], async (req, res) => {
 
     if(Object.keys(req.query).length === 0){
         console.log('No query parameters set. Returning all users');
@@ -51,7 +51,7 @@ router.get('/:id', [authMiddleware], async (req, res) => {
         return res.status(404).send('User with the given id does not exist');
     }
 
-    user = _.pick(user, ['firstName', 'lastName', 'email', 'mobileNumber', 'isAdmin']);
+    user = _.pick(user, ['firstName', 'lastName', 'email', 'mobileNumber', 'nic', 'isAdmin']);
     console.log('User found and sent');
     res.send(user);
     
@@ -77,9 +77,10 @@ router.post('/', async (req, res) => {
     user.save().then((user) => {
         console.log('New user successfully added to MongoDB');
         res.send(_.pick(user, ['_id', 'firstName', 'lastName', 'email']));
-    }).catch((err) => res.send(err.message));
+    });
     
 });
+
 
 router.delete('/:id', authMiddleware, async (req, res) => {
 

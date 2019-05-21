@@ -22,13 +22,14 @@ mongoose.connect('mongodb://localhost/TTRS', {useNewUrlParser:true}).then(() => 
     console.log(err);
 })
 
+app.use(cors({
+    //origin: 'http://localhost:3001'
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'x-auth-token'
+  }));
+
 //User the middleware 
 app.use(bodyParser.json());
-
-app.use(cors({
-    origin: 'http://localhost:3001',
-    credentials: true
-  }));
 
 app.use('/api/trains', trains);
 app.use('/api/users/', users);
